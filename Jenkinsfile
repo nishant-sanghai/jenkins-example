@@ -1,49 +1,22 @@
 pipeline {
     agent any
-
+    tools { 
+        maven 'Maven 3.8.1' 
+        jdk 'openJDK' 
+    }
     stages {
-        stage ('Compile Stage') {
-
+        stage ('Initialize') {
             steps {
-                
-                    sh 'mvn clean compile'
-                
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                ''' 
             }
         }
 
-        stage ('Testing Stage') {
-
+        stage ('Build') {
             steps {
-                
-                    sh 'mvn test'
-                
-            }
-            post {
-                success {
-                    script {
-                        skipstages = false
-                    }
-                    junit 'target/surefire-reports/**/*.xml'
-                }
-                failure {
-                    script {
-                        skipstages = true
-                    }
-                }
-            }
-        }
-
-
-        stage ('Deployment Stage') {
-            when {
-                expression {
-                    !skipstages
-                }
-            }
-            steps {
-                
-                    sh 'mvn deploy'
-                
+                echo 'This is a minimal pipeline.'
             }
         }
     }
