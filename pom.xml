@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.techprimers.testing</groupId>
+    <groupId>com.amdocs.AQE.nishant</groupId>
     <artifactId>jenkins-example</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -55,18 +55,22 @@
 
     </dependencies>
 
-    <!-- <repositories>
+   <repositories>
         <repository>
-            <id>myMavenRepo.read</id>
+            <id>myMavenRepoRead</id>
             <url>https://mymavenrepo.com/repo/vP4XcSygva0jdcty0qRd/</url>
         </repository>
     </repositories>
 
     <distributionManagement>
         <repository>
-            <id>myMavenRepo.write</id>
+            <id>myMavenRepoWrite</id>
             <url>https://mymavenrepo.com/repo/ecV9QhONA2G9SjVRCvTj/</url>
         </repository>
-    </distributionManagement> -->
+        <snapshotRepository>
+            <id>myMavenRepoWrite</id>
+            <url>https://mymavenrepo.com/repo/ecV9QhONA2G9SjVRCvTj/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>
