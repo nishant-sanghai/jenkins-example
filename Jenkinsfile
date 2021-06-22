@@ -5,19 +5,50 @@ pipeline {
         jdk 'openJDK' 
     }
     stages {
-        stage ('Initialize') {
+        stage ('Compile Stage') {
+
             steps {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                ''' 
+                
+                    sh 'mvn clean compile'
+                
             }
         }
 
-        stage ('Build') {
+        stage ('Testing Stage') {
+
             steps {
-                echo 'This is a minimal pipeline.'
+                
+                    sh 'mvn test'
+                
+            }
+            post {
+                success {
+                    script {
+                        skipstages = false
+                    }
+                    junit 'target/surefire-reports/**/*.xml'
+                }
+                failure {
+                    script {
+                        skipstages = true
+                    }
+                }
             }
         }
+
+
+        stage ('Deployment Stage') {
+            when {
+                expression {
+                    !skipstages
+                }
+            }
+            steps {
+                
+                    sh 'mvn deploy'
+                
+            }
+        }
+
     }
 }
